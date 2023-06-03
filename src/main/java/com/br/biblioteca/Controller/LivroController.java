@@ -27,7 +27,7 @@ public class LivroController {
     }
 
     @PostMapping("/homeLivro")
-    public String cadastro(Livro livro) {
+    public String cadastroLivro(Livro livro) {
         repository.save(livro);
         return "redirect:/listaLivro";
     }
@@ -42,13 +42,13 @@ public class LivroController {
     }
 
     @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable("id") int id) {
+    public String excluirLivro(@PathVariable("id") int id) {
         repository.deleteById(id);
         return "redirect:/listaLivro";
     }
 
     @GetMapping("/alugar/{id}")
-    public String alugar(@PathVariable("id") int id) {
+    public String alugarLivro(@PathVariable("id") int id) {
         Livro livro = repository.findById(id).get();
         livro.setStatus(true);
         repository.save(livro);
@@ -56,7 +56,7 @@ public class LivroController {
     }
 
     @GetMapping("/devolver/{id}")
-    public String devolver(@PathVariable("id") int id) {
+    public String devolverLivro(@PathVariable("id") int id) {
         Livro livro = repository.findById(id).get();
         livro.setStatus(false);
         repository.save(livro);
@@ -64,7 +64,7 @@ public class LivroController {
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") int id) {
+    public ModelAndView editarLivro(@PathVariable("id") int id) {
         ModelAndView mv = new ModelAndView("homeLivro");
        Livro livro = repository.findById(id).get();
         mv.addObject("livro", livro);
